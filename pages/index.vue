@@ -7,9 +7,9 @@ import ContactSection from '~/components/ContactSection.vue'
 
 <template>
   <div class="h-screen snap-y snap-mandatory overflow-y-auto scroll-smooth">
-    <AboutSection class="snap-start" />
-    <SessionsSection class="snap-start" />
-    <EventsSection class="snap-start" />
-    <ContactSection class="snap-start" />
+    <AboutSection />
+    <SessionsSection />
+    <EventsSection />
+    <ContactSection />
   </div>
 </template>
