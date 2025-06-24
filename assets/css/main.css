@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+nav {
+    font-size: larger;
+    font-family: Outfit;
+}
+
+.logo {
+    font-size: x-large;
+    font-family: Slackey;
+}
