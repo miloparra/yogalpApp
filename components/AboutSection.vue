@@ -1,6 +1,6 @@
 <template>
-    <section id="about" class="snap-start min-h-[calc(100vh-96px)] mt-24 scroll-mt-24 py-20">
-        <div class="h-[calc(100vh-96px)] grid grid-cols-3 grid-rows-3 my-[-80px]">
+    <section id="about" class="min-h-[calc(100vh-96px)] scroll-mt-24 mt-24 py-20">
+        <div class="h-[calc(100vh-96px)] my-[-80px] grid grid-cols-3 grid-rows-3">
             <!-- Case 1 -->
             <img class="w-full h-full object-cover border-r-3 border-r-[#9b4222] border-b-3 border-b-[#DB6437]"
                 src="public/photo_yoga_ext.jpg" alt="">
