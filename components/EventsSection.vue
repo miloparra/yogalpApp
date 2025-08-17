@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 
 const items = Array.from({ length: 10 }, (_, i) => ({
   id: i,
-  color: ['bg-red-300', 'bg-blue-300', 'bg-green-300', 'bg-yellow-300'][i % 4]
+  color: ['bg-[#DB6437]', 'bg-[#9b4222]', 'bg-[#FFC971]', 'bg-[#1C1C1C]'][i % 4]
 }))
 
 const currentIndex = ref(0)
@@ -26,9 +26,9 @@ const next = () => {
 
 <template>
   <section id="events" class="scroll-mt-24 py-20">
-    <div class="h-[calc(100vh-96px)] my-[-80px] grid grid-cols-2" :style="{ gridTemplateRows: `1fr 33.33vw auto` }">
-        <div class="bg-red-200"></div>
-        <div class="bg-red-500"></div>
+    <div class="h-[calc(100vh-96px)] my-[-80px] grid grid-cols-2" :style="{ gridTemplateRows: `1fr 33.33vw` }">
+        <div class="flex justify-center items-center text-3xl">Evenements</div>
+        <div class=""></div>
         <div class="col-span-2">
             <div class="relative h-full w-full overflow-hidden">
                 <!-- Carousel container -->
@@ -67,7 +67,7 @@ const next = () => {
                 </button>
             </div>
         </div>
-        <div class="col-span-2 h-6 bg-red-500"></div>
+        <!-- <div class="col-span-2 h-15 bg-[#DB6437]"></div> -->
     </div>
   </section>
 </template>
