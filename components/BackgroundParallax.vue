@@ -38,12 +38,12 @@ onBeforeUnmount(() => {
 <style scoped>
 .parallax-bg {
     position: absolute;
-    top: 0;
+    top: 96px;
     left: 0;
     height: 200%;
     width: 100%;
     background-image: url('public/bg.png');
-    opacity: 15%;
+    opacity: 5%;
     background-size: cover;
     background-position: center;
     z-index: -1;
