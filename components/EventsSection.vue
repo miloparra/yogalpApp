@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '#components'
 import { ref, computed } from 'vue'
 
 const items = Array.from({ length: 10 }, (_, i) => ({
@@ -26,48 +27,38 @@ const next = () => {
 
 <template>
   <section id="events" class="scroll-mt-24 py-20">
-    <div class="h-[calc(100vh-96px)] my-[-80px] grid grid-cols-2" :style="{ gridTemplateRows: `1fr 33.33vw` }">
-        <div class="flex justify-center items-center text-3xl">Evenements</div>
-        <div class=""></div>
-        <div class="col-span-2">
-            <div class="relative h-full w-full overflow-hidden">
-                <!-- Carousel container -->
+    <div class="h-[calc((100vh-96px)/1.5)] my-[-80px] grid" :style="{ gridTemplateColumns: `auto 1fr auto` }">
+        <div class="flex justify-center items-center w-40">
+          <button class="flex justify-center items-center w-20 h-20 rounded-full hover:bg-[#F7F7F7]" @click="prev">
+            <Icon name="weui:arrow-filled" size="50" class="rotate-180"></Icon>
+          </button>
+        </div>
+        <div class="relative h-full w-full overflow-hidden">
+            <!-- Carousel container -->
+            <div
+            class="flex transition-transform duration-500 ease-in-out h-full"
+            :style="{
+                width: `${(100 / visibleCount) * items.length}%`,
+                transform: `translateX(-${(100 / items.length) * currentIndex}%)`
+            }"
+            >
                 <div
-                class="flex transition-transform duration-500 ease-in-out h-full"
-                :style="{
-                    width: `${(100 / visibleCount) * items.length}%`,
-                    transform: `translateX(-${(100 / items.length) * currentIndex}%)`
-                }"
+                    v-for="item in items"
+                    :key="item.id"
+                    class="flex-none w-[calc(100%/10)] h-full scale-75"
+                    :class="item.color"
                 >
-                    <div
-                        v-for="item in items"
-                        :key="item.id"
-                        class="flex-none w-[calc(100%/10)] h-full rounded-full scale-75"
-                        :class="item.color"
-                    >
-                        <div class="h-full w-full flex items-center justify-center text-4xl text-white font-bold">
-                        {{ item.id }}
-                        </div>
+                    <div class="h-full w-full flex items-center justify-center text-4xl text-white font-bold">
+                    {{ item.id }}
                     </div>
                 </div>
-
-                <!-- Navigation arrows -->
-                <button
-                class="absolute h-full top-1/2 left-0 transform -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white px-3 py-2"
-                @click="prev"
-                >
-                <
-                </button>
-
-                <button
-                class="absolute h-full top-1/2 right-0 transform -translate-y-1/2 z-10 bg-black/30 hover:bg-black/50 text-white px-3 py-2"
-                @click="next"
-                >
-                >
-                </button>
             </div>
         </div>
-        <!-- <div class="col-span-2 h-15 bg-[#DB6437]"></div> -->
+        <div class="flex justify-center items-center w-40">
+          <button class="flex justify-center items-center w-20 h-20 rounded-full hover:bg-[#F7F7F7]" @click="next">
+            <Icon name="weui:arrow-filled" size="50"></Icon>
+          </button>
+        </div>
     </div>
   </section>
 </template>
