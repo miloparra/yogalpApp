@@ -30,7 +30,7 @@ const next = () => {
 </script>
 
 <template>
-  <section id="events" class="scroll-mt-24 py-20">
+  <section id="events" class="scroll-mt-24 py-40">
     <div class="h-[calc((100vh-96px)/2)] my-[-80px] grid" :style="{ gridTemplateColumns: `auto 1fr auto` }">
         <div class="flex justify-center items-center w-40">
           <button class="flex justify-center items-center w-20 h-20 rounded-full hover:bg-[#F7F7F7]" @click="prev">
