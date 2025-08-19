@@ -61,6 +61,11 @@ const send = async () => {
                             </div>
                         </div>
                     </div>
+                    <div class="flex items-center gap-3 mt-25 text-white">
+                        <NuxtLink to="/legalMentions" class="hover:underline">Mentions légales</NuxtLink>
+                        <p class="hidden lg:block">|</p>
+                        <NuxtLink to="/confidentiality" class="hover:underline">Politique de confidentialité</NuxtLink>
+                    </div>
                 </div>    
             </div>
             <div class="flex flex-col justify-center items-center">
