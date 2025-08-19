@@ -24,7 +24,7 @@ const send = async () => {
     success.value = res.success
 
     if (res.success) {
-      // Réinitialise les champs du formulaire
+      // reset form
       name.value = ""
       email.value = ""
       message.value = ""
