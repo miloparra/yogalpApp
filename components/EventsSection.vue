@@ -1,23 +1,27 @@
 <script setup lang="ts">
 import { Icon } from '#components'
 import { ref, computed } from 'vue'
+import { queryCollection } from '#imports'
 
-const items = Array.from({ length: 10 }, (_, i) => ({
-  id: i,
-  color: ['bg-[#DB6437]', 'bg-[#9b4222]', 'bg-[#FFC971]', 'bg-[#1C1C1C]'][i % 4]
-}))
+// get all the contents
+const allContent = await queryCollection('content').all()
+// get all the events contents
+const events = allContent.filter(item => item.path.startsWith('/events/'))
 
-const currentIndex = ref(0)
-const visibleCount = 3
+console.log(events)
 
-const maxIndex = computed(() => items.length - visibleCount)
+const currentIndex = ref(0) // first visible event index (left one)
+const visibleCount = 3 // number of visible event in the carousel
+const maxIndex = computed(() => events.length - visibleCount) // maximum departure index 
 
+// move to previous events
 const prev = () => {
   if (currentIndex.value > 0) {
     currentIndex.value--
   }
 }
 
+// move to nexts events
 const next = () => {
   if (currentIndex.value < maxIndex.value) {
     currentIndex.value++
@@ -27,7 +31,7 @@ const next = () => {
 
 <template>
   <section id="events" class="scroll-mt-24 py-20">
-    <div class="h-[calc((100vh-96px)/1.5)] my-[-80px] grid" :style="{ gridTemplateColumns: `auto 1fr auto` }">
+    <div class="h-[calc((100vh-96px)/2)] my-[-80px] grid" :style="{ gridTemplateColumns: `auto 1fr auto` }">
         <div class="flex justify-center items-center w-40">
           <button class="flex justify-center items-center w-20 h-20 rounded-full hover:bg-[#F7F7F7]" @click="prev">
             <Icon name="weui:arrow-filled" size="50" class="rotate-180"></Icon>
@@ -38,18 +42,20 @@ const next = () => {
             <div
             class="flex transition-transform duration-500 ease-in-out h-full"
             :style="{
-                width: `${(100 / visibleCount) * items.length}%`,
-                transform: `translateX(-${(100 / items.length) * currentIndex}%)`
+                width: `${(100 / visibleCount) * events.length}%`,
+                transform: `translateX(-${(100 / events.length) * currentIndex}%)`
             }"
             >
                 <div
-                    v-for="item in items"
-                    :key="item.id"
-                    class="flex-none w-[calc(100%/10)] h-full scale-75"
-                    :class="item.color"
+                    v-for="event in events"
+                    :key="event.id"
+                    class="flex-none h-full p-5"
+                    :style="{width: `calc(100% / ${events.length})`,}"
                 >
-                    <div class="h-full w-full flex items-center justify-center text-4xl text-white font-bold">
-                    {{ item.id }}
+                    <!-- Carousel card -->
+                    <div class="h-full w-full flex flex-col items-center justify-center font-bold border-3 border-amber-950 gap-4 p-5">
+                      <div class="text-lg">{{ event.title }}</div>
+                      <div class="text-md">{{ event.description }}</div>
                     </div>
                 </div>
             </div>
