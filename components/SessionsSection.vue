@@ -13,11 +13,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="paragraph w-3/4 flex items-center pr-7 text-sm">
+                <div class="paragraph w-3/4 flex items-center pr-7 text-md">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae ipsum sit amet enim
                     venenatis
                     commodo id volutpat nulla. Pellentesque pretium ac mi quis rutrum. Nullam convallis ex vel elit
-                    pellentesque porta. Sed convallis neque sit amet est mollis, et hendrerit mauris varius.
+                    pellentesque porta.
                 </div>
             </div>
             <!-- Cases 2/3 -->
@@ -32,7 +32,7 @@
             <div class="col-span-2 row-span-2 flex justify-center items-center">
                 <div>
                     <div class="text-5xl mb-10">Horaires</div>
-                    <div class="text-sm">
+                    <div class="text-md">
                         <div class="py-5">
                             <div>Lundi 17h30</div>
                             <div>Centre social, l'Argentière la Bessée</div>
