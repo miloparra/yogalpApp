@@ -54,8 +54,11 @@ const next = () => {
                 >
                     <!-- Carousel card -->
                     <div class="h-full w-full flex flex-col items-center justify-center font-bold border-3 border-amber-950 gap-4 p-5">
+                      <!-- Contenu frontmatter -->
                       <div class="text-lg">{{ event.title }}</div>
                       <div class="text-md">{{ event.description }}</div>
+                      <!-- Contenu markdown -->
+                      <ContentRenderer :value="event" />
                     </div>
                 </div>
             </div>
