@@ -1,3 +1,15 @@
+<script setup>
+const { $contentful } = useNuxtApp()
+
+const about = ref(null)
+
+const entries = await $contentful.getEntries({
+  content_type: 'about'
+})
+about.value = entries.items[0]?.fields || null
+
+</script>
+
 <template>
   <section id="about" class="scroll-mt-24 mt-24 py-20">
     <div class="h-[calc(100vh-96px)] my-[-80px] grid grid-cols-3 overflow-hidden scale-90">
@@ -16,10 +28,7 @@
           Yogalp
         </div>
         <div class="w-3/5 flex justify-center items-center text-md text-justify mt-15">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae ipsum sit amet enim venenatis commodo id
-          volutpat nulla. Pellentesque pretium ac mi quis rutrum. Nullam convallis ex vel elit pellentesque porta. Sed
-          convallis neque sit amet est mollis, et hendrerit mauris varius. Maecenas sed vehicula erat, elementum congue
-          neque.
+          {{ about?.presentation }}
         </div>
       </div>
     </div>
