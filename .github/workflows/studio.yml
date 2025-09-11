@@ -63,7 +63,10 @@ jobs:
         env:
           NITRO_PRESET: github_pages
           NUXT_CONTENT_PREVIEW_API: https://api.nuxt.studio
-          
+          NUXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN: ${{ secrets.NUXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN }}
+NUXT_PUBLIC_CONTENTFUL_SPACE_ID: ${{ secrets.NUXT_PUBLIC_CONTENTFUL_SPACE_ID }}
+SMTP_PASS: ${{ secrets.SMTP_PASS }}
+SMTP_USER: ${{ secrets.SMTP_USER }}
 
       # Deployment job
       - name: Deploy 🚀
