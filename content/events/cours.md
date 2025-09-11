@@ -1,6 +1,6 @@
 ---
-title: "Cours de Yoga"
+title: Cours de Wow
 date: 2025-09-01
 lieu: Toulouse
-description: "Un cours de yoga en plaine nature."
+description: Un cours de yoga en plaine nature.
 ---
