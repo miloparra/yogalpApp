@@ -1,10 +1,40 @@
 <script setup lang="ts">
 import { ref } from "vue"
 
-let name = ref("")
+const name = ref("")
 const email = ref("")
 const message = ref("")
 const success = ref(false)
+
+interface SendMailResponse {
+  success: boolean
+  error?: string
+}
+
+const send = async () => {
+  try {
+    const res = await $fetch<SendMailResponse>("/api/contact", {
+      method: "POST",
+      body: {
+        subject: `Message de ${name.value}`,
+        message: `Email: ${email.value}\n\n${message.value}`
+      }
+    })
+
+    success.value = res.success
+
+    if (res.success) {
+      // reset form
+      name.value = ""
+      email.value = ""
+      message.value = ""
+    }
+
+  } catch (err) {
+    console.error(err)
+    success.value = false
+  }
+}
 
 </script>
 
@@ -31,16 +61,16 @@ const success = ref(false)
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3 mt-25 text-white">
+                    <!-- <div class="flex items-center gap-3 mt-25 text-white">
                         <NuxtLink to="/legalMentions" class="hover:underline">Mentions légales</NuxtLink>
                         <p class="hidden lg:block">|</p>
                         <NuxtLink to="/confidentiality" class="hover:underline">Politique de confidentialité</NuxtLink>
-                    </div>
+                    </div> -->
                 </div>    
             </div>
             <div class="flex flex-col justify-center items-center">
                 <h2 class="text-3xl font-bold text-center mb-20">Contactez-nous !</h2>
-                <form class="w-2/3 flex flex-col gap-5 mb-5">
+                <form @submit.prevent="send" class="w-2/3 flex flex-col gap-5 mb-5">
                     <input v-model="name" class="bg-[#ff9b73] opacity-40 placeholder-black p-3" type="text" placeholder="Nom">
                     <input v-model="email" class="bg-[#ff9b73] opacity-40 placeholder-black p-3" type="email" placeholder="Email">
                     <textarea v-model="message" class="bg-[#ff9b73] opacity-40 placeholder-black p-3" type="text" placeholder="Message"></textarea>

@@ -18,5 +18,11 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     '@nuxt/test-utils',
     '@nuxt/ui'
-  ]
+  ],
+
+  runtimeConfig: {
+    SMTP_USER: process.env.MAIL_USER,
+    SMTP_PASS: process.env.MAIL_PASS,
+    SMTP_TO: process.env.MAIL_TO,
+  }
 })
