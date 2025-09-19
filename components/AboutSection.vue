@@ -16,7 +16,7 @@
           Yogalp
         </div>
         <div class="w-3/5 flex justify-center items-center text-md text-justify mt-15">
-          
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mattis malesuada justo, non bibendum ante viverra sollicitudin. Aenean vitae augue ac tortor laoreet mollis eget quis magna.
         </div>
       </div>
     </div>
