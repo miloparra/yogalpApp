@@ -24,27 +24,32 @@ onMounted(() => {
       isScrolled ? 'bg-white shadow-md' : 'bg-transparent text-white'
     ]">
         <div class="h-24 flex justify-between items-center">
-            <nav class="max-w-5xl mx-auto flex justify-center items-center gap-8 font-medium">
-                <a href="/#about" class="w-26 text-center hover:text-[#ffba88] transition-colors">Yogalp</a>
-                <a href="/#sessions" class="w-26 text-center hover:text-[#ffba88] transition-colors">Horaires</a>
+            <nav class="max-w-5xl mx-auto flex justify-center items-center gap-8 text-lg font-medium">
+                <a href="/#about" class="w-26 text-center hover:text-[#FFC971] transition-colors duration-300">Yogalp</a>
+                <a href="/#sessions" class="w-26 text-center hover:text-[#FFC971] transition-colors duration-300">Horaires</a>
 
-                <NuxtLink to="/#about" class="relative w-20 h-20">
+                <NuxtLink to="/#home" class="relative w-20 h-20 group">
                     <img
                     src="/IconeWhite.png"
                     alt="Logo blanc"
-                    class="absolute top-0 left-0 w-full h-full transition-opacity duration-1000"
+                    class="absolute top-0 left-0 w-full h-full group-hover:opacity-0 transition-opacity duration-1500"
                     :class="{ 'opacity-0': isScrolled }"
                     />
                     <img
                     src="/IconeBlack.png"
                     alt="Logo noir"
-                    class="absolute top-0 left-0 w-full h-full transition-opacity duration-1000"
+                    class="absolute top-0 left-0 w-full h-full group-hover:opacity-0 transition-opacity duration-1500"
                     :class="{ 'opacity-83': isScrolled, 'opacity-0': !isScrolled }"
+                    />
+                    <img
+                    src="/Icone_Yellow.png"
+                    alt="Logo jaune"
+                    class="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-400"
                     />
                 </NuxtLink>
 
-                <a href="/#events" class="w-26 text-center hover:text-[#ffba88] transition-colors">Evenements</a>
-                <a href="/#contact" class="w-26 text-center hover:text-[#ffba88] transition-colors">Contact</a>
+                <a href="/#events" class="w-26 text-center hover:text-[#FFC971] transition-colors duration-300">Evenements</a>
+                <a href="/#contact" class="w-26 text-center hover:text-[#FFC971] transition-colors duration-300">Contact</a>
             </nav>
         </div>
     </header>
