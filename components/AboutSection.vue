@@ -4,7 +4,7 @@
             <!-- Case 1/2/3 -->
             <div class="px-50 col-span-3 flex justify-center items-center">
                 <div class="w-1/3 flex justify-center">
-                    <div class="w-57 h-57 flex justify-center items-center border-t-3 border-r-2 border-b-4 border-l-3 border-[#314158] rounded-full">
+                    <div class="w-57 h-57 flex justify-center items-center border-t-3 border-r-2 border-b-4 border-l-3 border-[#314158] rounded-full rotate-30">
                         <img class="w-50 h-50 rounded-full object-cover" src="/escalade.jpg" alt="">
                     </div>
                 </div>
@@ -32,14 +32,14 @@
                             Mais
                         </div>
                         <div class="w-full flex justify-end my-[-4px]">
-                            c'est
+                            qui
                         </div>
                         <div class="w-full flex justify-end">
-                            qui
+                            est
                         </div>
                     </div>
                     <div class="flex justify-center text-7xl font-semibold px-1">
-                        Yogalp
+                        YOGALP
                     </div>
                     <div class="flex justify-center text-7xl">
                         ?
