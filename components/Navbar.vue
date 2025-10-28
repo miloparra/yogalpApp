@@ -1,16 +1,28 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const isScrolled = ref(false)
 
 onMounted(() => {
+
     const handleScroll = () => {
-    isScrolled.value = window.scrollY > 50 // seuil de déclenchement (50px)
+        if (route.path === '/confidentiality' || route.path === '/legalMentions') {
+            isScrolled.value = true
+        } else {
+            isScrolled.value = window.scrollY > 50
+        }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
 
     handleScroll()
+
+    // Recalcule à chaque changement de route
+    watch(() => route.path, () => {
+        setTimeout(handleScroll, 200)
+    })
 
     onUnmounted(() => {
         window.removeEventListener('scroll', handleScroll)
