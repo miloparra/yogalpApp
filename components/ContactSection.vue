@@ -7,40 +7,38 @@ const success = ref(false)
 </script>
 
 <template>
-    <section id="contact" class="scroll-mt-24 py-40 bg-[#F27F53]">
-        <div class="h-[calc(100vh-96px)/2] my-[-80px] grid grid-cols-2">
-            <div class="flex flex-col justify-center items-center">
-                <div class="flex flex-col items-center">
-                    <div class="flex items-center">
-                        <img class="w-50 h-50" src="/IconeWhite.png" alt="">
-                        <div>
-                            <div class="flex items-center gap-3 mt-4">
-                                <Icon name="ic:baseline-local-phone" size="20" class="text-white"></Icon>
-                                <div class="text-white">055456666</div>
-                            </div>
-                            <div class="flex items-center gap-3 mt-4">
-                                <Icon name="ic:baseline-alternate-email" size="20" class="text-white"></Icon>
-                                <div class="text-white">yogalp@gmail.com</div>
-                            </div>
-                            <div class="flex items-center gap-3 mt-4">
-                                <Icon name="ic:round-house-siding" size="20" class="text-white"></Icon>
-                                <div>
-                                    <p class="text-white">2 Impasse des Myosotis</p>
-                                    <p class="text-white">15600 MAURS</p>
-                                </div>
+    <section id="contact" class="scroll-mt-20 lg:scroll-mt-24">
+        <div class="h-[calc(100vh-80px)] lg:h-[60vh] grid grid-rows-2 lg:grid-rows-1 lg:grid-cols-2 bg-[#F27F53]">
+            <div class="order-2 lg:order-1 flex flex-col justify-center items-center">
+                <div class="flex items-center">
+                    <img class="w-25 h-25 lg:w-50 lg:h-50" src="/IconeWhite.png" alt="">
+                    <div class="text-sm lg:text-base">
+                        <div class="flex items-center gap-3 mt-4">
+                            <Icon name="ic:baseline-local-phone" size="20" class="text-white"></Icon>
+                            <div class="text-white">055456666</div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4">
+                            <Icon name="ic:baseline-alternate-email" size="20" class="text-white"></Icon>
+                            <div class="text-white">yogalp@gmail.com</div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4">
+                            <Icon name="ic:round-house-siding" size="20" class="text-white"></Icon>
+                            <div>
+                                <p class="text-white">2 Impasse des Myosotis</p>
+                                <p class="text-white">15600 MAURS</p>
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3 py-10 text-white">
-                        <NuxtLink to="/legalMentions" class="hover:underline">Mentions légales</NuxtLink>
-                        <p class="hidden lg:block">|</p>
-                        <NuxtLink to="/confidentiality" class="hover:underline">Politique de confidentialité</NuxtLink>
-                    </div>
-                </div>    
+                </div>
+                <div class="flex flex-col lg:flex-row items-center gap-3 py-5 lg:py-10 text-white text-sm lg:text-base">
+                    <NuxtLink to="/legalMentions" class="hover:underline">Mentions légales</NuxtLink>
+                    <p class="hidden lg:block">|</p>
+                    <NuxtLink to="/confidentiality" class="hover:underline">Politique de confidentialité</NuxtLink>
+                </div>  
             </div>
-            <div class="flex flex-col justify-center items-center">
-                <h2 class="text-4xl font-bold text-center mb-8 text-white">Contactez-nous !</h2>
-                <form class="w-2/3 flex flex-col gap-5">
+            <div class="order-1 lg:order-2 flex flex-col justify-end lg:justify-center items-center">
+                <h2 class="text-2xl lg:text-4xl font-bold text-center mb-3 lg:mb-8 text-white">Contactez-nous !</h2>
+                <form class="w-2/3 flex flex-col gap-2 lg:gap-5 text-sm lg:text-base">
                     <input v-model="name" class="bg-white opacity-35 placeholder-black p-3 pl-5 rounded-lg" type="text" placeholder="Nom">
                     <input v-model="email" class="bg-white opacity-35 placeholder-black p-3 pl-5 rounded-lg" type="email" placeholder="Email">
                     <textarea v-model="message" class="bg-white opacity-38 placeholder-black p-3 pl-5 rounded-lg" type="text" placeholder="Message"></textarea>
