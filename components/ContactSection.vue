@@ -1,27 +1,53 @@
 <script setup lang="ts">
-import { ref } from "vue"
-let name = ref("")
-const email = ref("")
-const message = ref("")
-const success = ref(false)
+import { ref, reactive } from 'vue'
+
+const form = reactive({ name: '', email: '', message: '' })
+const loading = ref(false)
+const successMessage = ref('')
+const errorMessage = ref('')
+
+const sendMessage = async () => {
+  loading.value = true
+  successMessage.value = ''
+  errorMessage.value = ''
+
+  console.log("Vue : " + JSON.stringify(form))
+
+  try {
+    const response = await $fetch('/api/contact', {
+      method: 'POST',
+      body: form,
+    })
+    successMessage.value = response.message
+
+    // reset du form
+    form.name = ''
+    form.email = ''
+    form.message = ''
+  } catch (error: any) {
+    errorMessage.value = error?.data?.statusMessage || 'Erreur inconnue'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
     <section id="contact" class="scroll-mt-20 lg:scroll-mt-24">
         <div class="h-[calc(100vh-80px)] lg:h-[60vh] grid grid-rows-2 lg:grid-rows-1 lg:grid-cols-2 bg-[#F27F53]">
-            <div class="order-2 lg:order-1 flex flex-col justify-center items-center">
+            <div class="order-2 lg:order-1 flex flex-col justify-center items-center mt-5 lg:mt-0">
                 <div class="flex items-center">
                     <img class="w-25 h-25 lg:w-50 lg:h-50" src="/IconeWhite.png" alt="">
-                    <div class="text-sm lg:text-base">
-                        <div class="flex items-center gap-3 mt-4">
+                    <div class="text-sm lg:text-base flex flex-col gap-4">
+                        <div class="flex items-center gap-3">
                             <Icon name="ic:baseline-local-phone" size="20" class="text-white"></Icon>
                             <div class="text-white">055456666</div>
                         </div>
-                        <div class="flex items-center gap-3 mt-4">
+                        <div class="flex items-center gap-3">
                             <Icon name="ic:baseline-alternate-email" size="20" class="text-white"></Icon>
                             <div class="text-white">yogalp@gmail.com</div>
                         </div>
-                        <div class="flex items-center gap-3 mt-4">
+                        <div class="flex items-center gap-3">
                             <Icon name="ic:round-house-siding" size="20" class="text-white"></Icon>
                             <div>
                                 <p class="text-white">2 Impasse des Myosotis</p>
@@ -30,27 +56,26 @@ const success = ref(false)
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col lg:flex-row items-center gap-3 py-5 lg:py-10 text-white text-sm lg:text-base">
+                <div class="flex flex-col lg:flex-row items-center gap-3 lg:py-10 pt-10 text-white text-sm lg:text-base">
                     <NuxtLink to="/legalMentions" class="hover:underline">Mentions légales</NuxtLink>
                     <p class="hidden lg:block">|</p>
                     <NuxtLink to="/confidentiality" class="hover:underline">Politique de confidentialité</NuxtLink>
                 </div>  
             </div>
-            <div class="order-1 lg:order-2 flex flex-col justify-end lg:justify-center items-center">
+            <div class="relative order-1 lg:order-2 flex flex-col justify-end lg:justify-center items-center">
                 <h2 class="text-2xl lg:text-4xl font-bold text-center mb-3 lg:mb-8 text-white">Contactez-nous !</h2>
-                <form class="w-2/3 flex flex-col gap-2 lg:gap-5 text-sm lg:text-base">
-                    <input v-model="name" class="bg-white opacity-35 placeholder-black p-3 pl-5 rounded-lg" type="text" placeholder="Nom">
-                    <input v-model="email" class="bg-white opacity-35 placeholder-black p-3 pl-5 rounded-lg" type="email" placeholder="Email">
-                    <textarea v-model="message" class="bg-white opacity-38 placeholder-black p-3 pl-5 rounded-lg" type="text" placeholder="Message"></textarea>
+                <form @submit.prevent="sendMessage" class="w-2/3 flex flex-col gap-2 lg:gap-5 text-sm lg:text-base">
+                    <input v-model="form.name" class="bg-white opacity-35 placeholder-black p-2 lg:p-3 pl-5 rounded-lg" type="text" placeholder="Nom">
+                    <input v-model="form.email" class="bg-white opacity-35 placeholder-black p-2 lg:p-3 pl-5 rounded-lg" type="email" placeholder="Email">
+                    <textarea v-model="form.message" class="bg-white opacity-38 placeholder-black p-2 lg:p-3 pl-5 rounded-lg" type="text" placeholder="Message"></textarea>
                     <div class="flex justify-center">
                         <UButton class="w-40 flex justify-center bg-[#F27F53] hover:bg-[#f39b78] transition-colors duration-600 cursor-pointer" type="submit" trailing-icon="i-lucide-arrow-right" size="xl">Envoyer</UButton>
                     </div>
                 </form>
-                <div v-if="success" class="flex items-center gap-2">
-                    <Icon name="material-symbols:check-circle-rounded" size="18"></Icon>
-                    <p> Message envoyé !</p>
+                <div class="absolute -bottom-6 lg:bottom-15 flex items-center gap-2">
+                    <Icon v-if="successMessage" name="material-symbols:check-circle-rounded" size="18"></Icon>
+                    <p v-if="successMessage" class="text-sm font-semibold"> Message envoyé !</p>
                 </div>
-
             </div>
         </div>
     </section>
