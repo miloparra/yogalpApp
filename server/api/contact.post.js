@@ -9,16 +9,14 @@ export default defineEventHandler(async (event) => {
         throw createError({ statusCode: 400, statusMessage: 'Missing fields' })
     }
 
-    // Configure ton transporteur mail
+    // Configuration du transporteur SMTP
     const transporter = nodemailer.createTransport({
-        service: 'gmail', // ou un autre provider SMTP
+        service: 'gmail',
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS,
         },
-        tls: process.env.NODE_ENV === 'development'
-            ? { rejectUnauthorized: false }
-            : undefined, // rien en prod, sécurisé par défaut
+        tls: undefined, // rien en prod, sécurisé par défaut
     })
 
     // Définir le contenu du mail
