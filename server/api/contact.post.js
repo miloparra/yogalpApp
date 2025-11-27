@@ -1,44 +1,25 @@
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event)
 
-    const { name, email, message } = body
-
-    if (!name || !email || !message) {
-        throw createError({ statusCode: 400, statusMessage: 'Missing fields' })
-    }
-
-    // Configuration du transporteur SMTP
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS,
-        },
-        tls: {
-            rejectUnauthorized: false, // 👈 ignore les certificats auto-signés
-        },
-    })
-
-    // Définir le contenu du mail
-    const mailOptions = {
-        from: `"${name}" <${email}>`,
-        to: process.env.MAIL_TO || process.env.MAIL_USER,
-        subject: 'Nouveau message depuis le formulaire de contact',
-        text: message,
-        html: `
-      <p><strong>Nom :</strong> ${name}</p>
-      <p><strong>Email :</strong> ${email}</p>
-      <p><strong>Message :</strong><br>${message}</p>
-    `,
-    }
+    const resend = new Resend(process.env.RESEND_API_KEY)
 
     try {
-        await transporter.sendMail(mailOptions)
-        return { success: true, message: 'Message envoyé avec succès !' }
+        await resend.emails.send({
+            from: 'Formulaire Contact Yogalp',
+            to: process.env.MAIL_USER, // adresse où tu reçois les mails
+            subject: '📩 Nouveau message depuis Yogalp',
+            html: `
+            <p><strong>Nom:</strong> ${body.name}</p>
+            <p><strong>Email:</strong> ${body.email}</p>
+            <p><strong>Message:</strong><br>${body.message}</p>
+        `
+        })
+
+        return { success: true }
     } catch (error) {
         console.error(error)
-        throw createError({ statusCode: 500, statusMessage: 'Erreur lors de l’envoi du mail' })
+        return { success: false, error: 'Envoi impossible' }
     }
 })

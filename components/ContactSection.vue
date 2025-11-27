@@ -1,34 +1,38 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+const form = reactive({
+  name: '',
+  email: '',
+  message: ''
+})
 
-const form = reactive({ name: '', email: '', message: '' })
 const loading = ref(false)
-const successMessage = ref('')
-const errorMessage = ref('')
-
+const success = ref(false)
+const error = ref('')
+  
 const sendMessage = async () => {
   loading.value = true
-  successMessage.value = ''
-  errorMessage.value = ''
-
-  console.log("Vue : " + JSON.stringify(form))
+  success.value = false
+  error.value = ''
 
   try {
-    const response = await $fetch('/api/contact', {
+    const res = await $fetch('/api/contact', {
       method: 'POST',
-      body: form,
+      body: form
     })
-    successMessage.value = response.message
 
-    // reset du form
-    form.name = ''
-    form.email = ''
-    form.message = ''
-  } catch (error: any) {
-    errorMessage.value = error?.data?.statusMessage || 'Erreur inconnue'
-  } finally {
-    loading.value = false
+    if (res.success) {
+      success.value = true
+      form.name = ''
+      form.email = ''
+      form.message = ''
+    } else {
+      error.value = 'Impossible d’envoyer le message'
+    }
+  } catch (err) {
+    error.value = 'Erreur interne'
   }
+
+  loading.value = false
 }
 </script>
 
@@ -73,8 +77,8 @@ const sendMessage = async () => {
                     </div>
                 </form>
                 <div class="absolute -bottom-6 lg:bottom-15 flex items-center gap-2">
-                    <Icon v-if="successMessage" name="material-symbols:check-circle-rounded" size="18"></Icon>
-                    <p v-if="successMessage" class="text-sm font-semibold"> Message envoyé !</p>
+                    <Icon v-if="success" name="material-symbols:check-circle-rounded" size="18"></Icon>
+                    <p v-if="success" class="text-sm font-semibold"> Message envoyé !</p>
                 </div>
             </div>
         </div>
