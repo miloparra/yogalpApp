@@ -16,7 +16,9 @@ export default defineEventHandler(async (event) => {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS,
         },
-        tls: undefined, // rien en prod, sécurisé par défaut
+        tls: {
+            rejectUnauthorized: false, // 👈 ignore les certificats auto-signés
+        },
     })
 
     // Définir le contenu du mail
