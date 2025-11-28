@@ -7,9 +7,9 @@ export default defineEventHandler(async (event) => {
 
     try {
         await resend.emails.send({
-            from: 'Formulaire Contact Yogalp',
-            to: process.env.MAIL_USER, // adresse où tu reçois les mails
-            subject: '📩 Nouveau message depuis Yogalp',
+            from: 'Yogalp',
+            to: process.env.MAIL_TO, // adresse où tu reçois les mails
+            subject: '📩 Nouveau message',
             html: `
             <p><strong>Nom:</strong> ${body.name}</p>
             <p><strong>Email:</strong> ${body.email}</p>
